@@ -1,29 +1,32 @@
 'use strict';
 
-angular.module('app.controllers', []);
+angular.module('checkeroo.controllers', []);
 
-angular.module('app.directives', []);
-angular.module('app.services', ['ngResource']);
-angular.module('app.factories', []);
-angular.module('app.filters', []);
+angular.module('checkeroo.directives', []);
+angular.module('checkeroo.services', ['ngResource']);
+angular.module('checkeroo.factories', []);
+angular.module('checkeroo.filters', []);
 
-angular.module('app', [
+angular.module('checkeroo', [
         'ngRoute',
-        'app.controllers',
-        'app.services',
-        'app.directives',
-        'app.factories',
-        'app.filters'
+        'checkeroo.controllers',
+        'checkeroo.services',
+        'checkeroo.directives',
+        'checkeroo.factories',
+        'checkeroo.filters'
     ])
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true).hashPrefix('!');
     }])
     .config(['$routeProvider', function ($routeProvider) {
-            
         $routeProvider
             .when('/join', {
                 templateUrl: 'templates/join.html',
                 controller: 'JoinController'
+            })
+            .when('/order', {
+                templateUrl: 'templates/order.html',
+                controller: 'OrderController'
             })
             .otherwise({redirectTo: '/join'});
 }]);

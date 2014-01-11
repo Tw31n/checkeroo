@@ -9,12 +9,12 @@
                     <form accept-charset="UTF-8" role="form">
                     <fieldset>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Party name" name="party" type="text" autofocus="true">
+                            <input ng-model="partyName" class="form-control" placeholder="Party name" name="party" type="text" autofocus="true">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Your nickname" name="login" type="text">
+                            <input ng-model="login" class="form-control" placeholder="Your nickname" name="login" type="text">
                         </div>
-                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Join!">
+                        <button ng-click="join()" class="btn btn-lg btn-success btn-block">Join!</button>
                     </fieldset>
                     </form>
                 </div>
