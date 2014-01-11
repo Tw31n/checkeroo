@@ -4,7 +4,7 @@ class DishesController < ApplicationController
   # GET /dishes
   # GET /dishes.json
   def index
-    @dishes = Dish.all
+    @dishes = current_party.dishes.includes(:users)
   end
 
   # GET /dishes/1

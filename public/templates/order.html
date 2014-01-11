@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div>{{Session.currentUser}}</div>
-            <div>{{Session.currentParty}}</div>
+            <div>{{ session.party_name }}</div>
+            <div>{{ session.user_name }}</div>
 
             <div class="panel panel-default">
               <div class="panel-heading">Order a dish</div>
@@ -12,10 +12,13 @@
                       <input type="text" class="form-control" placeholder="Dish name" ng-model="dish.name" autofocus="true" required>
                     </div>
                     <div class="form-group">
-                      <input type="number" class="form-control" placeholder="Price" ng-model="dish.price" required>
+                      <input type="text" class="form-control" placeholder="Price" ng-model="dish.price" required>
                     </div>
                     <button ng-disabled="dishForm.$invalid" class="btn btn-default" ng-click="placeOrder()">Place order</button>
                   </form>
+                Panel content
+                <button type="button" class="btn btn-default btn-sm" ng-click="loadDishes()">Refresh order</button>
+
               </div>
 
               <table class="table">
@@ -27,10 +30,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr ng-repeat="dish in dishes">
+                        <th>{{ dish.name }}</th>
+                        <th>{{ dish.price }}</th>
+                        <th>
+                            <span ng-repeat="participant in dish.participants">{{ participant }}</span>
+                        </th>
+                    </tr>
                 </tbody>
               </table>
             </div>
         </div>
     </div>
 </div>
-
