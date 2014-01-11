@@ -1,17 +1,12 @@
 'use strict';
 
 angular.module('checkeroo.controllers')
-    .controller('JoinController', ['$scope, Session', function ($scope, Session) {
-        $scope.join = function() {
-            var params = {
-                login: $scope.login,
-                partyName: $scope.partyName
-            };
+    .controller('JoinController', ['$scope', 'Session', '$location', function ($scope, Session, $location) {
+        $scope.session = {};
 
-            Session.get(params, function (response) {
-                if(response.status == 'OK') {
-                    $location.path('order');
-                }
+        $scope.join = function() {
+            Session.save($scope.session, function (response) {
+                $location.path('order');
             });
         }
     }]);

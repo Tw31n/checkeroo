@@ -6,15 +6,15 @@
                     <h3 class="panel-title">Make the party rocks!</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form">
+                    <form name="joinForm" accept-charset="UTF-8" role="form">
                     <fieldset>
                         <div class="form-group">
-                            <input ng-model="partyName" class="form-control" placeholder="Party name" name="party" type="text" autofocus="true">
+                            <input ng-model="session.party_name" class="form-control" placeholder="Party name" name="party" type="text" autofocus="true" required>
                         </div>
                         <div class="form-group">
-                            <input ng-model="login" class="form-control" placeholder="Your nickname" name="login" type="text">
+                            <input ng-model="session.user_name" class="form-control" placeholder="Your nickname" name="login" type="text" required>
                         </div>
-                        <button ng-click="join()" class="btn btn-lg btn-success btn-block">Join!</button>
+                        <button ng-disabled="joinForm.$invalid" ng-click="join()" class="btn btn-lg btn-success btn-block">Join!</button>
                     </fieldset>
                     </form>
                 </div>
@@ -22,3 +22,4 @@
         </div>
     </div>
 </div>
+

@@ -18,6 +18,10 @@ angular.module('checkeroo', [
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true).hashPrefix('!');
     }])
+    .config(['$httpProvider', function ($httpProvider) {
+        var authToken = $("meta[name=\"csrf-token\"]").attr("content");
+        $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
+    }])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/join', {
@@ -30,4 +34,3 @@ angular.module('checkeroo', [
             })
             .otherwise({redirectTo: '/join'});
 }]);
-  
