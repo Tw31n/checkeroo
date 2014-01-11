@@ -24,7 +24,7 @@ class DishesController < ApplicationController
   # POST /dishes
   # POST /dishes.json
   def create
-    @dish = Dish.new(dish_params)
+    @dish = current_party.dishes.build(dish_params)
 
     respond_to do |format|
       if @dish.save

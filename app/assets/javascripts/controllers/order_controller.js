@@ -1,47 +1,18 @@
 'use strict';
 
 angular.module('checkeroo.controllers')
-    .controller('OrderController', ['$scope', 'Session', 'Order', function ($scope, Session, Order) {
+    .controller('OrderController', ['$scope', 'Dish', function ($scope, Dish) {
 
-        $scope.addOrder = function () {
-            if(needUpdate) {
-                var params = $scope.order;
-                params.participants.push(Session.currentUser);
-
-                Order.save(params, function (response) {
-                    if(response.status == 'OK') {
-                        resetOrder();
-                        alert('Update!');
-                    }
-                });
-            } else {
-                alert('Nothing update! Fill all fields');
-            }
-        };
-
-        var needUpdate = function () {
-            var hasName = !!$scope.order.name;
-            var hasPrice = !!$scope.order.price;
-
-            return hasName && hasPrice;
+        $scope.placeOrder = function () {
+            console.log($scope.dish);
+            // Dish.save($scope.dish, function (response) {
+            //     resetOrder();
+            // });
         };
 
         var resetOrder = function () {
-            $scope.order = {
-                name: undefined,
-                price: undefined,
-                participants: [],
-                time: new Date
-            };
+            $scope.dish = {};
         };
 
         resetOrder();
-
-        $scope.order = {
-            name: 'fish',
-            price: '10',
-            participants: ['john', 'jane'],
-            time: new Date
-        };
-
     }]);

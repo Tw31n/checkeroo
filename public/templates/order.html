@@ -5,10 +5,17 @@
             <div>{{Session.currentParty}}</div>
 
             <div class="panel panel-default">
-              <div class="panel-heading">Make order</div>
+              <div class="panel-heading">Order a dish</div>
               <div class="panel-body">
-                    Panel content
-                <button type="button" class="btn btn-default btn-sm" ng-click="addOrder()">Add order</button>
+                  <form name="dishForm" class="form-inline" role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Dish name" ng-model="dish.name" autofocus="true" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="number" class="form-control" placeholder="Price" ng-model="dish.price" required>
+                    </div>
+                    <button ng-disabled="dishForm.$invalid" class="btn btn-default" ng-click="placeOrder()">Place order</button>
+                  </form>
               </div>
 
               <table class="table">
