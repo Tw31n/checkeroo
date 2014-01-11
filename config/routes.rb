@@ -63,4 +63,6 @@ Checkeroo::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get '*path', to: 'static_pages#index'
 end
