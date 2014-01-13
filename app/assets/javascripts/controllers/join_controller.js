@@ -6,9 +6,8 @@ angular.module('checkeroo.controllers')
 
         $scope.join = function() {
             Session.save($rootScope.session, function (response) {
-                $rootScope.session.user_name = response.user_name;
-                $rootScope.session.party_name = response.party_name;
-
+                Session.user_name = response.user_name;
+                Session.party_name = response.party_name;
                 $location.path('order');
             });
         }

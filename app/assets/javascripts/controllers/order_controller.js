@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('checkeroo.controllers')
-    .controller('OrderController', ['$scope', 'Order', 'Dish', 'Session', function ($scope, Order, Dish, Session) {
+    .controller('OrderController', ['$scope', 'Order', 'Dish', 'Session', '$location', function ($scope, Order, Dish, Session, $location) {
+        if(!Session.user_name) {
+            $location.path('/join');
+        }
+
         $scope.placeOrder = function () {
             Order.save($scope.dish, function(response) {
                $scope.dishes.push(response);

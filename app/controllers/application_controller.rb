@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_party
-    @current_party ||= Party.find(session[:party_id])
+    @current_party ||= Party.where(id: session[:party_id]).take
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    @current_user ||= User.where(id: session[:user_id]).take
   end
 
 end

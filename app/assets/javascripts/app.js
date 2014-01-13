@@ -30,7 +30,18 @@ angular.module('checkeroo', [
             })
             .when('/order', {
                 templateUrl: 'templates/order.html',
-                controller: 'OrderController'
+                controller: 'OrderController',
+                resolve: {
+                    delay: function(Session) {
+                        return Session.get({}, function (res) {
+                            console.log(res.user);
+                            if (res.user) {
+                                Session.user_name = res.user;
+                                Session.party_name = res.party;
+                            }
+                        });
+                    }
+                }
             })
             .otherwise({redirectTo: '/join'});
 }]);
