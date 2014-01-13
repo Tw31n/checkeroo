@@ -1,12 +1,7 @@
 'use strict';
 
 angular.module('checkeroo.controllers')
-    .controller('OrderController', ['$scope', 'Order', 'Dish', function ($scope, Order, Dish) {
-        $scope.session = {
-            party_name: "party",
-            user_name: "alex"
-        };
-
+    .controller('OrderController', ['$scope', 'Order', 'Dish', 'Session', function ($scope, Order, Dish, Session) {
         $scope.placeOrder = function () {
             Order.save($scope.dish, function(response) {
                $scope.dishes.push(response);
@@ -15,11 +10,24 @@ angular.module('checkeroo.controllers')
         };
 
         $scope.loadDishes = function () {
-            var params = { party_name: $scope.session.party_name };
+            var params = { party_name: Session.party_name };
 
             Dish.get(params, function (response) {
                 $scope.dishes = response.dishes;
             });
+        };
+
+        $scope.ownPaySum = function () {
+            var result = 0;
+
+            angular.forEach($scope.dishes, function(dish) {
+                for(var i = 0; i < dish.participants.length; i++) {
+                    if(dish.participants[i] == Session.user_name)
+                      result+= dish.price;
+                };
+            });
+
+            return result;
         };
 
         var resetOrder = function () {

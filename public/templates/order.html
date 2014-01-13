@@ -1,44 +1,50 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div>{{ session.party_name }}</div>
-            <div>{{ session.user_name }}</div>
-
             <div class="panel panel-default">
-              <div class="panel-heading">Order a dish</div>
-              <div class="panel-body">
-                  <form name="dishForm" class="form-inline" role="form">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Dish name" ng-model="dish.name" autofocus="true" required>
+                <div class="panel-heading">Order a dish</div>
+                <div class="panel-body">
+                    <form name="dishForm" class="form-inline" role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Dish name" ng-model="dish.name" autofocus="true" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Price" ng-model="dish.price" required>
+                        </div>
+                        <button ng-disabled="dishForm.$invalid" class="btn btn-default" ng-click="placeOrder()">Place order</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Order list&nbsp
+                    <button type="button" class="btn btn-default btn-sm" ng-click="loadDishes()">Refresh order</button>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Participants</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in dishes">
+                                <th>{{ item.name }}</th>
+                                <th>{{ item.price }}</th>
+                                <th>
+                                    <span class="label label-primary" ng-repeat="participant in item.participants">{{ participant }}</span>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        Your unit to pay: {{ ownPaySum() }}
                     </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Price" ng-model="dish.price" required>
-                    </div>
-                    <button ng-disabled="dishForm.$invalid" class="btn btn-default" ng-click="placeOrder()">Place order</button>
-                  </form>
-                Panel content
-                <button type="button" class="btn btn-default btn-sm" ng-click="loadDishes()">Refresh order</button>
+                        
 
-              </div>
-
-              <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Participants</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in dishes">
-                        <th>{{ item.name }}</th>
-                        <th>{{ item.price }}</th>
-                        <th>
-                            <span class="label label-primary" ng-repeat="participant in item.participants">{{ participant }}</span>
-                        </th>
-                    </tr>
-                </tbody>
-              </table>
+                </div>
             </div>
         </div>
     </div>
