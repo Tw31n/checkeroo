@@ -30,11 +30,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="dish in dishes">
-                        <th>{{ dish.name }}</th>
-                        <th>{{ dish.price }}</th>
+                    <tr ng-repeat="item in dishes">
+                        <th>{{ item.name }}</th>
+                        <th>{{ item.price }}</th>
                         <th>
-                            <span ng-repeat="participant in dish.participants">{{ participant }}</span>
+                            <span class="label label-primary" ng-repeat="participant in item.participants">{{ participant }}</span>
                         </th>
                     </tr>
                 </tbody>

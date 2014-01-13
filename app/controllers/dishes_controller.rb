@@ -4,7 +4,17 @@ class DishesController < ApplicationController
   # GET /dishes
   # GET /dishes.json
   def index
-    @dishes = current_party.dishes.includes(:users)
+    result = { :dishes => [] }
+    dishes = Dish.where(party: current_party).includes(:users)
+
+    dishes.each do |dish|
+      users = []
+
+      dish.users.each { |user| users << user.login }
+      result[:dishes] << { :name => dish.name, :price => dish.price, :participants => users }
+    end
+
+    render json: result
   end
 
   # GET /dishes/1

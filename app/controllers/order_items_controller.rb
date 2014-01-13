@@ -24,17 +24,12 @@ class OrderItemsController < ApplicationController
   # POST /order_items
   # POST /order_items.json
   def create
-    @order_item = OrderItem.new(order_item_params)
+    dish = Dish.where(name: params[:name]).first
+    dish ||= Dish.create(name: params[:name], party: current_party, price: params[:price])
 
-    respond_to do |format|
-      if @order_item.save
-        format.html { redirect_to @order_item, notice: 'Order item was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @order_item }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
-      end
-    end
+    OrderItem.create(user: current_user, dish: dish)
+
+    render json: { :name => dish.name, :price => dish.price, :participants => [current_user.login] }
   end
 
   # PATCH/PUT /order_items/1
